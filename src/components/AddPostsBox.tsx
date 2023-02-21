@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const AddPosts = () => {
+const AddPostsBox = () => {
 
     const navigate = useNavigate();
 
@@ -15,7 +15,7 @@ const AddPosts = () => {
     );
 };
 
-export default AddPosts;
+export default AddPostsBox;
 
 const StPostsContainer = styled.div`
     display : flex;
@@ -26,6 +26,10 @@ const StPostsContainer = styled.div`
     background-color : #0075C4;
     border-radius : 0.25rem;
     box-shadow : 0px 0px 1rem rgba(0, 0, 0, .15);
+    transition : 100ms;
+    &:hover {
+        background-color : #0284db;
+    }
 `
 
 const StAddPosts = styled.div`

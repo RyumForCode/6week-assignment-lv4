@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import AddPosts from "./AddPosts";
+import AddPostsBox from "./AddPostsBox";
 import PostsBox from "./PostsBox";
 
 const ListPosts = () => {
@@ -9,7 +9,7 @@ const ListPosts = () => {
             <PostsBox />
             <PostsBox />
             <PostsBox />
-            <AddPosts />
+            <AddPostsBox />
         </StListPostsContainer>
     );
 };
@@ -25,4 +25,15 @@ const StListPostsContainer = styled.div`
     flex-wrap : wrap;
     gap : 32px 2.5%;
     z-index : 1;
+
+    animation: fadein 400ms;
+
+    @keyframes fadein {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
 `

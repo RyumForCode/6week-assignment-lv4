@@ -26,7 +26,7 @@ const StFooter = styled.div`
 const StFooterContents = styled.div`
     font-family : 'inter';
     font-size : 1rem;
-    font-weight : 400;
+    font-weight : 600;
     color : white;
     margin-left : 1.5rem;
 `

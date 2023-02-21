@@ -1,9 +1,13 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 
 const Header = () => {
+
+    const navigate = useNavigate();
+
     return (
         <StHeader>
-            <StLogoBox>
+            <StLogoBox onClick = {() => {navigate(`/`)}}>
                 <StLogo>
                     The <br/>
                     Super <br/>
@@ -17,7 +21,7 @@ const Header = () => {
 export default Header;
 
 const StHeader = styled.div`
-flex-shrink: 0;
+    flex-shrink : 0;
     width : 100vw;
     height : 128px;
     display : flex;
@@ -35,6 +39,10 @@ const StLogoBox = styled.div`
     height : 6rem;
     border-radius : 0.25rem;
     box-shadow : 0px 0px 1rem rgba(0, 0, 0, .15);
+    transition : 100ms;
+    &:hover {
+        background-color : #0284db;
+    }
 `
 
 const StLogo = styled.div`
