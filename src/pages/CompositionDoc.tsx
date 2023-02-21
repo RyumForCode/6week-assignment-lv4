@@ -4,13 +4,13 @@ import Footer from "../components/ui/Footer";
 import Header from "../components/ui/Header";
 
 const CompositionDoc = () => {
-    return (
-    <StWrapper>
-        <Header/>
-        <Composition/>
-        <Footer/>
-    </StWrapper>
-    )
+  return (
+  <StWrapper>
+      <Header/>
+      <Composition/>
+      <Footer/>
+  </StWrapper>
+  )
 };
 
 export default CompositionDoc;
@@ -18,7 +18,6 @@ export default CompositionDoc;
 const StWrapper = styled.div`
   display : flex;
   width : 100%;
-  box-sizing: border-box;
   height : 100vh;
   margin : auto;
   flex-direction : column;

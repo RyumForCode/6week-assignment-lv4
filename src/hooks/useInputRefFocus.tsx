@@ -1,16 +1,25 @@
 import { useEffect, useRef, useState } from "react";
 
-const useInputRefFocus = () : [React.RefObject<HTMLInputElement>, boolean] => {
+const useInputRefFocus = () : [React.RefObject<any>, boolean] => {
     const [inputRefFocus, setInputRefFocus] = useState<boolean>(false);
-    const inputRef = useRef<HTMLInputElement>(null);
+    const inputRef = useRef<any>(null);
 
     useEffect(() => {
-        if (document.activeElement === inputRef.current) {
+        function inputFocusIn () {
             setInputRefFocus(true);
-        } else {
+        }
+
+        function inputFocusOut () {
             setInputRefFocus(false);
         }
-    }, [document.activeElement])
+
+        inputRef.current?.addEventListener('focus', inputFocusIn);
+        inputRef.current?.addEventListener('blur', inputFocusOut);
+        return () => {
+            inputRef.current?.removeEventListener('focus', inputFocusIn);
+            inputRef.current?.removeEventListener('blur', inputFocusOut);
+        };
+    }, []);
 
     return [inputRef, inputRefFocus];
 }

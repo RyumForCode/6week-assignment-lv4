@@ -1,14 +1,20 @@
 import styled from "styled-components";
+import useInputRefFocus from "../hooks/useInputRefFocus";
 
 const Composition = () => {
+
+    const [titleRef, titleBoolean] = useInputRefFocus();
+    const [authorRef, authorBoolean] = useInputRefFocus();
+    const [descRef, descBoolean] = useInputRefFocus();
+
     return (
         <StCompositionContainer>
-            <StLabel>Title</StLabel>
-            <StInputTitle placeholder = 'Insert the title. (Up to 50 characters)'/>
-            <StLabel>Author</StLabel>
-            <StInputAuthor placeholder = 'Insert the author. (Up to 10 characters)'/>
-            <StLabel>Description</StLabel>
-            <StInputDesc placeholder = 'Insert the title. (At least 50 characters)'/>
+            <StLabelTitle focusControl = {titleBoolean} htmlFor = 'InputTitle'>Title</StLabelTitle>
+            <StInputTitle placeholder = 'Insert the title. (Up to 50 characters)' ref = {titleRef} id = 'InputTitle'/>
+            <StLabelAuthor focusControl = {authorBoolean} htmlFor = 'InputAuthor'>Author</StLabelAuthor>
+            <StInputAuthor placeholder = 'Insert the author. (Up to 10 characters)' ref = {authorRef} id = 'InputAuthor'/>
+            <StLabelDesc focusControl = {descBoolean} htmlFor = 'InputDesc'>Description</StLabelDesc>
+            <StInputDesc placeholder = 'Insert the title. (At least 50 characters)' ref = {descRef} id = 'InputDesc'/>
             <StButtonDiv>
                 <StButton buttonType = {1}>Cancel</StButton>
                 <StButton buttonType = {0}>Publish</StButton>
@@ -40,13 +46,37 @@ const StCompositionContainer = styled.div`
     }
 `
 
-const StLabel = styled.div`
+const StLabelTitle = styled.label<{focusControl? : boolean}>`
     font-family : 'inter';
     font-size : 1.5rem;
     font-weight : 900;
     &:nth-of-type(n+2) {
         margin-top : 2rem;
     }
+    color : ${({focusControl}) => focusControl ? '#0075C4' : 'black'};
+    transition : 200ms;
+`
+
+const StLabelAuthor = styled.label<{focusControl? : boolean}>`
+    font-family : 'inter';
+    font-size : 1.5rem;
+    font-weight : 900;
+    &:nth-of-type(n+2) {
+        margin-top : 2rem;
+    }
+    color : ${({focusControl}) => focusControl ? '#0075C4' : 'black'};
+    transition : 200ms;
+`
+
+const StLabelDesc = styled.label<{focusControl? : boolean}>`
+    font-family : 'inter';
+    font-size : 1.5rem;
+    font-weight : 900;
+    &:nth-of-type(n+2) {
+        margin-top : 2rem;
+    }
+    color : ${({focusControl}) => focusControl ? '#0075C4' : 'black'};
+    transition : 200ms;
 `
 
 const StInputTitle = styled.input`
