@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
+import styled from 'styled-components';
 import './App.css';
+import Footer from './components/ui/Footer';
+import Header from './components/ui/Header';
+import Router from './shared/Router';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <StWrapper>
+      <Header/>
+        <Router />
+      <Footer/>
+    </StWrapper>
   );
 }
 
 export default App;
+
+const StWrapper = styled.div`
+  display : flex;
+  width : 100%;
+  height : 100vh;
+  margin : auto;
+  flex-direction : column;
+  justify-content : space-between;
+  z-index : 2;
+`
