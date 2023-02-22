@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import styled from "styled-components";
 import { getPosts } from "../api/posts";
 import AddPostsBox from "./AddPostsBox";
@@ -6,7 +6,10 @@ import PostsBox from "./PostsBox";
 
 const ListPosts = () => {
 
-    const { data } = useQuery('posts', getPosts)
+
+    const { isLoading, isError, data } = useQuery('posts', getPosts);
+    if(isLoading) return <div>loading</div>;
+    if(isError) return <div>Error</div>;
 
     return (
         <StListPostsContainer>
