@@ -1,16 +1,16 @@
 import styled from "styled-components";
-import Composition from "../components/Composition";
+import PostsDetail from "../components/PostsDetail";
 import Footer from "../components/ui/Footer";
 import Header from "../components/ui/Header";
 
 const Posts = () => {
-    return (
+  return (
     <StWrapper>
-        <Header/>
-        
-        <Footer/>
+      <Header/>
+      <PostsDetail/>
+      <Footer/>
     </StWrapper>
-    )
+  )
 };
 
 export default Posts;

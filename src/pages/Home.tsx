@@ -4,13 +4,13 @@ import Footer from "../components/ui/Footer";
 import Header from "../components/ui/Header";
 
 const Home = () => {
-    return (
+  return (
     <StWrapper>
-        <Header/>
-        <ListPosts />
-        <Footer/>
+      <Header/>
+      <ListPosts />
+      <Footer/>
     </StWrapper>
-    )
+  )
 };
 
 export default Home;

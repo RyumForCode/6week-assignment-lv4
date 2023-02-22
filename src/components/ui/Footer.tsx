@@ -4,7 +4,7 @@ const Footer = () => {
     return (
         <StFooter>
             <StFooterContents>
-                Contents
+                © 2021. Hwang Jisang all rights reserved.
             </StFooterContents>
         </StFooter>
     );
@@ -26,7 +26,7 @@ const StFooter = styled.div`
 const StFooterContents = styled.div`
     font-family : 'inter';
     font-size : 1rem;
-    font-weight : 600;
+    font-weight : 400;
     color : white;
     margin-left : 1.5rem;
 `

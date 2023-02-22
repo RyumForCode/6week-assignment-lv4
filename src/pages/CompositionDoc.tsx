@@ -5,11 +5,11 @@ import Header from "../components/ui/Header";
 
 const CompositionDoc = () => {
   return (
-  <StWrapper>
+    <StWrapper>
       <Header/>
       <Composition/>
       <Footer/>
-  </StWrapper>
+    </StWrapper>
   )
 };
 

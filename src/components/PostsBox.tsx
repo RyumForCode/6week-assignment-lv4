@@ -3,16 +3,16 @@ import styled from "styled-components";
 
 const word = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce volutpat enim vitae odio ullamcorper auctor. Donec a leo nec orci cursus tristique. Quisque vel dapibus est. Nulla porttitor, turpis in condimentum tempus, mi felis lacinia tellus, non fermentum turpis orci quis sem. In at laoreet arcu. Pellentesque vel ornare tellus. Pellentesque vel varius nulla, vitae feugiat leo. Donec sit amet lorem quis massa maximus elementum. Pellentesque aliquet massa quis dolor congue vehicula.';
 
-const PostsBox = () => {
+const PostsBox = ({ item } : { item : { id : number, title : string, author : string, desc : string } }) => {
 
     const navigate = useNavigate();
 
     return (
-        <StPostsContainer onClick={() => {navigate(`/posts/1`)}}>
+        <StPostsContainer onClick={() => {navigate(`/posts/${item.id}`)}}>
             <StMarginDiv>
-                <StTitle>This is Title</StTitle>
-                <StAuthor>David</StAuthor>
-                <StDesc>{word.slice(0, 265) + '...'}</StDesc>
+                <StTitle>{item.title}</StTitle>
+                <StAuthor>{item.author}</StAuthor>
+                <StDesc>{item.desc.slice(0, 265) + '...'}</StDesc>
             </StMarginDiv>
         </StPostsContainer>
     );
@@ -27,6 +27,12 @@ const StPostsContainer = styled.div`
     border-radius : 0.25rem;
     box-shadow : 0px 0px 1rem rgba(0, 0, 0, .15);
     overflow : hidden;
+    transition : 100ms;
+    &:hover {
+        outline : none;
+        outline: 2px solid #0284db;
+        outline-offset: -2px;
+    }
 `
 
 const StMarginDiv = styled.div`
@@ -38,6 +44,7 @@ const StTitle = styled.div`
     font-size : 2rem;
     font-weight : 900;
     color : #0075C4;
+    word-break : break-word;
 `
 
 const StAuthor = styled.div`
@@ -46,6 +53,7 @@ const StAuthor = styled.div`
     font-size : 1rem;
     font-weight : 700;
     color : rgb(128, 128, 128);
+    word-break : break-all;
 `
 const StDesc = styled.p`
     width : 100%;

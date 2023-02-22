@@ -1,14 +1,16 @@
+import { useQuery } from "react-query";
 import styled from "styled-components";
+import { getPosts } from "../api/posts";
 import AddPostsBox from "./AddPostsBox";
 import PostsBox from "./PostsBox";
 
 const ListPosts = () => {
+
+    const { data } = useQuery('posts', getPosts)
+
     return (
         <StListPostsContainer>
-            <PostsBox />
-            <PostsBox />
-            <PostsBox />
-            <PostsBox />
+            {data?.map((item : any) => <PostsBox key = {item.id} item = {item} />)}
             <AddPostsBox />
         </StListPostsContainer>
     );

@@ -1,23 +1,61 @@
 import styled from "styled-components";
 import useInputRefFocus from "../hooks/useInputRefFocus";
+import useInput from "../hooks/useInput";
+import { addPosts } from "../api/posts";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const Composition = () => {
+
+    const [validation, setValidation] = useState<boolean>(false);
+
+    const navigate = useNavigate();
+
+    const [title, titleHandler, clearTitle] = useInput();
+    const [author, authorHandler, clearAuthor] = useInput();
+    const [desc, descHandler, clearDesc] = useInput();
 
     const [titleRef, titleBoolean] = useInputRefFocus();
     const [authorRef, authorBoolean] = useInputRefFocus();
     const [descRef, descBoolean] = useInputRefFocus();
 
+    useEffect(() => {setValidation(false)}, [title, author, desc]);
+
+    const publishButtonHandler = () => {
+        if (!(title === '' || author === '' || desc === '')) {
+            addPosts({title, author, desc});
+
+            clearTitle();
+            clearAuthor();
+            clearDesc();
+
+            navigate('/');
+        } else {
+            setValidation(true);
+        }
+    }
+
+    const cancelButtonHandler = () => {
+        if (!(title === '' && author === '' && desc === '')) {
+            const cancelButtonAnswer = window.confirm('Are you sure to leave this form?');
+            if (cancelButtonAnswer) return navigate('/');
+        } else {
+            navigate('/');
+        }
+    }
+
     return (
         <StCompositionContainer>
             <StLabelTitle focusControl = {titleBoolean} htmlFor = 'InputTitle'>Title</StLabelTitle>
-            <StInputTitle placeholder = 'Insert the title. (Up to 50 characters)' ref = {titleRef} id = 'InputTitle'/>
+            <StInputTitle value = {title} onChange = {titleHandler} placeholder = 'Insert the title. (Up to 50 characters)' ref = {titleRef} id = 'InputTitle' maxLength = {50}/>
             <StLabelAuthor focusControl = {authorBoolean} htmlFor = 'InputAuthor'>Author</StLabelAuthor>
-            <StInputAuthor placeholder = 'Insert the author. (Up to 10 characters)' ref = {authorRef} id = 'InputAuthor'/>
+            <StInputAuthor value = {author} onChange = {authorHandler} placeholder = 'Insert the author. (Up to 10 characters)' ref = {authorRef} id = 'InputAuthor' maxLength = {10}/>
             <StLabelDesc focusControl = {descBoolean} htmlFor = 'InputDesc'>Description</StLabelDesc>
-            <StInputDesc placeholder = 'Insert the title. (At least 50 characters)' ref = {descRef} id = 'InputDesc'/>
+            <StInputDesc value = {desc} onChange = {descHandler} placeholder = 'Insert the title.' ref = {descRef} id = 'InputDesc'/>
             <StButtonDiv>
-                <StButton buttonType = {1}>Cancel</StButton>
-                <StButton buttonType = {0}>Publish</StButton>
+                {validation ? <StValidationMsg>Please fill all fields</StValidationMsg> : null}
+                <StButton buttonType = {1} onClick = {cancelButtonHandler}>Cancel</StButton>
+                <StButton buttonType = {0} onClick = {publishButtonHandler}>Publish</StButton>
             </StButtonDiv>
         </StCompositionContainer>
     );
@@ -38,10 +76,10 @@ const StCompositionContainer = styled.div`
 
     @keyframes fadein {
         from {
-            opacity: 0;
+            opacity : 0;
         }
         to {
-            opacity: 1;
+            opacity : 1;
         }
     }
 `
@@ -154,6 +192,8 @@ const StButtonDiv = styled.div`
     width : 100%;
     display : flex;
     justify-content: flex-end;
+    align-items: center;
+    gap : 1rem;
 `
 
 const StButton = styled.button<{buttonType? : number}>`
@@ -162,7 +202,6 @@ const StButton = styled.button<{buttonType? : number}>`
     font-family : 'inter';
     font-size : 1rem;
     font-weight : 700;
-    margin-left : 1rem;
     border : ${({buttonType}) => buttonType === 1 ? '2px solid #0075C4' : 'none'};
     border-radius : 0.25rem;
     background-color : ${({buttonType}) => buttonType === 1 ? 'white' : '#0075C4'};
@@ -172,5 +211,23 @@ const StButton = styled.button<{buttonType? : number}>`
         background-color : ${({buttonType}) => buttonType === 1 ? null : '#0284db'};
         border : ${({buttonType}) => buttonType === 1 ? '2px solid #0284db' : null};
         color : ${({buttonType}) => buttonType === 1 ? '#0284db' : null};
+    }
+`
+
+const StValidationMsg = styled.p`
+    font-family : 'inter';
+    font-size : 1rem;
+    font-weight : 700;
+    color : #ff3b30;
+    
+    animation: fadein 400ms;
+
+    @keyframes fadein {
+        from {
+            opacity : 0;
+        }
+        to {
+            opacity : 1;
+        }
     }
 `
